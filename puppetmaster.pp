@@ -45,10 +45,10 @@ puppet resource service mcollective ensure=stopped
 ",
   } ->
   file{'/root/bin/start_puppet_services.sh':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0770',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0770',
     content => "# This Script is Managed by in the
 #Puppet Node Definition for ${fqdn}
 #!/bin/bash
@@ -57,6 +57,23 @@ puppet resource service puppetdb ensure=running
 puppet resource service postgresql ensure=running
 puppet resource service mcollective ensure=running
 ",
+  }
+
+  file{'/etc/hosts':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => "127.0.0.1 puppetmaster.dev puppetmaster puppet
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+127.0.1.1 ubuntu-xenial ubuntu-xenial",
   }
 
   vcsrepo{"/usr/local/src/puppet-module-skeleton":
