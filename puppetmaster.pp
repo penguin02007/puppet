@@ -7,8 +7,12 @@ node /puppetmaster.*/ {
   # PuppetServer
   class { 'puppetserver::repository': } ->
   class { 'puppetserver': }
-  class { 'puppetdb':}
-  class { 'puppetdb::master::config':}
+  class { 'puppetdb':
+     disable_ssl => true,
+  }
+  class { 'puppetdb::master::config':
+    puppetdb_disable_ssl  => true,
+  }
 
   # OS Provided Gems
   package{'rspec-puppet-local':
