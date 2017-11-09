@@ -97,7 +97,7 @@ ff02::3 ip6-allhosts
   }
   # Apache Vhost for PuppetBoard Web UI
   class { 'puppetboard::apache::vhost':
-    vhost_name => ${::fqdn},
+    vhost_name => $::fqdn,
     port       => 80,
   }
 
