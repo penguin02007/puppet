@@ -24,13 +24,13 @@ node /puppetmaster.*/ {
     ensure => latest,
   }
 
-  file{'/root/bin':
+  file {'/root/bin':
     ensure => directory,
     owner  => 'root',
     group  => 'root',
     mode   => '0770',
   } ->
-  file{'/root/bin/stop_puppet_services.sh':
+  file {'/root/bin/stop_puppet_services.sh':
     ensure => file,
     owner  => 'root',
     group  => 'root',
@@ -44,7 +44,7 @@ puppet resource service postgresql ensure=stopped
 puppet resource service mcollective ensure=stopped
 ",
   } ->
-  file{'/root/bin/start_puppet_services.sh':
+  file {'/root/bin/start_puppet_services.sh':
     ensure  => file,
     owner   => 'root',
     group   => 'root',
@@ -59,7 +59,7 @@ puppet resource service mcollective ensure=running
 ",
   }
 
-  file{'/etc/hosts':
+  file {'/etc/hosts':
     ensure  => file,
     owner   => 'root',
     group   => 'root',
@@ -74,9 +74,10 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
 127.0.1.1 ubuntu-xenial ubuntu-xenial",
+    notify => Package['puppetserver'],
   }
 
-  vcsrepo{"/usr/local/src/puppet-module-skeleton":
+  vcsrepo {"/usr/local/src/puppet-module-skeleton":
     source => 'https://github.com/garethr/puppet-module-skeleton',
     provider => git,
     ensure   => 'latest',
