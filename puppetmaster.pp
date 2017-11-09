@@ -64,7 +64,7 @@ puppet resource service mcollective ensure=running
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => "127.0.0.1 puppetmaster.dev puppetmaster puppet
+    content => "127.0.0.1 $::fqdn $::hostname puppet
 
 # The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback
