@@ -4,36 +4,17 @@ node /puppetmaster.*/ {
   sysctl { 'net.ipv6.conf.all.disable_ipv6': value => '1' }
   sysctl { 'net.ipv6.conf.default.disable_ipv6': value => '1' }
   sysctl { 'net.ipv6.conf.lo.disable_ipv6': value => '1' }
-  # PuppetServer
+
+  # PuppetServer and PuppetDB
   class { 'puppetserver::repository': } ->
-  class { 'puppetserver': }
+  class { 'puppetserver': } ->
   class { 'puppetdb':
-     disable_ssl => true,
+    disable_ssl => false,
   }
   class { 'puppetdb::master::config':
-    puppetdb_disable_ssl  => true,
+    puppetdb_disable_ssl  => false,
   }
 
-  # OS Provided Gems
-  package{'rspec-puppet-local':
-    name => 'rspec-puppet',
-    ensure => latest,
-    provider => gem,
-  }
-  package{'hiera-eyaml-local':
-    name => 'hiera-eyaml',
-    ensure => latest,
-    provider => gem,
-  }
-  # PuppetServer Path Ruby Gem Packages
-  package {[
-    'hiera-eyaml',
-    'rspec-puppet',
-    'puppet-blacksmith',
-  ]:
-    ensure => latest,
-    provider => puppetserver_gem,
-  }
   # Additional Packages for Puppet Module Testing/Development Provided by the OS
   package {[
     'puppet-lint',
@@ -49,7 +30,7 @@ node /puppetmaster.*/ {
     group  => 'root',
     mode   => '0770',
   } ->
-  file{'/root/bin/stop_puppetdb_services.sh':
+  file{'/root/bin/stop_puppet_services.sh':
     ensure => file,
     owner  => 'root',
     group  => 'root',
@@ -63,7 +44,7 @@ puppet resource service postgresql ensure=stopped
 puppet resource service mcollective ensure=stopped
 ",
   } ->
-  file{'/root/bin/start_puppetdb_services.sh':
+  file{'/root/bin/start_puppet_services.sh':
     ensure => file,
     owner  => 'root',
     group  => 'root',
@@ -88,7 +69,7 @@ puppet resource service mcollective ensure=running
   class { 'apache': }
   class { 'apache::mod::wsgi': }
 
-# PuppetBoard Web UI
+  # PuppetBoard Web UI
   class { 'puppetboard':
     manage_git        => true,
     manage_virtualenv => true,
