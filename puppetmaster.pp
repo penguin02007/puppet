@@ -50,7 +50,7 @@ puppet resource service mcollective ensure=stopped
     group   => 'root',
     mode    => '0770',
     content => "# This Script is Managed by in the
-#Puppet Node Definition for ${fqdn}
+#Puppet Node Definition for ${::fqdn}
 #!/bin/bash
 puppet resource service puppet ensure=running
 puppet resource service puppetdb ensure=running
@@ -64,7 +64,7 @@ puppet resource service mcollective ensure=running
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => "127.0.0.1 $::fqdn $::hostname puppet
+    content => "127.0.0.1 localhost ${::fqdn} ${::hostname} puppet
 
 # The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback
@@ -73,7 +73,7 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
-127.0.1.1 ubuntu-xenial ubuntu-xenial",
+",
     notify => Package['puppetserver'],
   }
 
@@ -97,7 +97,7 @@ ff02::3 ip6-allhosts
   }
   # Apache Vhost for PuppetBoard Web UI
   class { 'puppetboard::apache::vhost':
-    vhost_name => $::fqdn,
+    vhost_name => ${::fqdn},
     port       => 80,
   }
 
