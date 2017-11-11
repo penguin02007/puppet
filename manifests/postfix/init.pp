@@ -1,5 +1,8 @@
 class postfix {
 
+  $generic = "smtp@hydesquare.org root@ap1.0086.nets.ws
+           "
+
   $sasl = $operatingsystem ? {
     Ubuntu => libsasl2-modules,
     RedHat => cyrus-sasl-plain,
@@ -7,8 +10,12 @@ class postfix {
 
   package { 'cyrus-sasl-plain':
     name     => $sasl,
-    ensure   => 'installed',
+    ensure   => installed,
     provider => yum,
+  }
+
+  package { 'postfix':
+    ensure   => installed,
   }
 
   file { '/etc/postfix/main.cf':
