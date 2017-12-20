@@ -1,5 +1,4 @@
-# This file lives in /etc/puppetlabs/code/environments/production
-forge "http://forge.puppetlabs.com"
+forge "http://forge.puppet.com"
 
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
@@ -39,6 +38,28 @@ mod "glarizza/property_list_key", :latest
 mod "jaredjennings/mac_plist_value", :latest
 mod "rcoleman/mac_profiles_handler", :latest
 mod "sfu/managedmac", :latest
+mod "skoblenick-vagrant", :latest
+mod "skoblenick-skype", :latest
+mod "skoblenick-sourcetree", :latest
+# mod "skoblenick-jenkins", :latest
+mod "skoblenick-firefox", :latest
+mod "skoblenick-appcleaner", :latest
+# mod "skoblenick-java", :latest
+# mod "skoblenick-nodejs", :latest
+mod "skoblenick-vmware_fusion", :latest
+mod "skoblenick-unarchiver", :latest
+mod "skoblenick-pycharm", :latest
+mod "skoblenick-chrome", :latest
+# mod "skoblenick-virtualbox", :latest
+mod "skoblenick-vlc", :latest
+mod "skoblenick-xquartz", :latest
+mod "skoblenick-wireshark", :latest
+mod "skoblenick-filezilla", :latest
+# mod "skoblenick-git", :latest
+mod "skoblenick-blender", :latest
+mod "skoblenick-sophos", :latest
+mod "skoblenick-asepsis", :latest
+
 
 # Begin Linux/Win
 mod "ajcrowe/confd", :latest
@@ -58,7 +79,7 @@ mod "dalen/puppetdbquery", :latest
 # mod "dhollinger/autofs", :latest
 mod "derdanne/nfs", :latest
 mod "garethr/erlang", :latest
-mod "garethr/docker", :latest
+# mod "garethr/docker", :latest
 # This module requires a cluster api
 #mod "garethr/kubernetes", :latest
 mod "gentoo/portage", :latest
@@ -79,17 +100,22 @@ mod "herculesteam/augeasproviders_sysctl", :latest
 mod "herculesteam/augeasproviders_syslog", :latest
 mod "jamtur01/httpauth", :latest
 mod "jhoblitt/ganglia", :latest
+mod "jsok/vault", :latest
 mod "ktreese/nssm", :latest
-mod "luxflux/openvpn", :latest
+mod "KyleAnderson/consul", :latest
+# mod "luxflux/openvpn", :latest
 # Currently adding support for proxydhcp in downstream
 # mod "lex/dnsmasq", :latest
 mod "liamjbennett/win_facts", :latest
 mod "lwf/remote_file", :latest
 mod "maestrodev/ssh_keygen", :latest
-mod "michaeltchapman/galera", :latest
+#mod "michaeltchapman/galera", :latest
+# michaelchapemen is depreciated
+mod "fraenki/galera", :latest
 mod "mosen/cups", :latest
 mod "noma4i/windows_xmltask", :latest
 mod "opendaylight/opendaylight", :latest
+mod "otherskins/ansible", :latest
 # VoxPupuli Modules
 mod "puppet/amanda", :latest
 mod "puppet/autofs", :latest
@@ -103,15 +129,22 @@ mod "puppet/dotnet", :latest
 mod "puppet/gerrit", :latest
 mod "puppet/graphite_powershell", :latest
 mod "puppet/healthcheck", :latest
-mod "puppet/iis", :latest
 mod "puppet/jenkins_job_builder", :latest
 mod "puppet/letsencrypt", :latest
+mod "puppet/logrotate", :latest
 mod "puppet/mrepo", :latest
 mod "puppet/msoffice", :latest
 mod "puppet/nginx", :latest
 mod "puppet/nodejs", :latest
+mod "puppet/openvpn", :latest
 mod "puppet/puppetboard", :latest
-mod "puppet/rhsm", :latest
+mod "puppet/r10k", :latest
+mod "puppet/rabbitmq", :latest
+# 
+#mod "puppet/rhsm", # :latest
+#  :git => 'https://github.com/voxpupuli/puppet-rhsm',
+#  :branch => 'master'
+  
 # puppet-puppetserver on github.com/voxpupuli/puppet-puppetserver
 mod "camptocamp/augeas", :latest
 mod "camptocamp/kmod", :latest
@@ -138,7 +171,7 @@ mod "puppetlabs/apache", :latest
 mod "puppetlabs/apt", :latest
 #  :git => 'https://github.com/puppetlabs/puppetlabs-apt',
 #  :branch => 'master'
-#  :tag => '3.0.0'
+#  :tag => '3.0.0' 
 mod "puppetlabs/aws", :latest
 mod "puppetlabs/azure", :latest
 mod "puppetlabs/catalog_preview", :latest
@@ -146,10 +179,13 @@ mod "puppetlabs/ciscopuppet", :latest
 mod "puppetlabs/concat", :latest
 mod "puppetlabs/dsc", :latest
 mod "puppetlabs/dism", :latest
+mod "puppetlabs/docker", :latest
 mod "puppetlabs/firewall", :latest
 mod "puppetlabs/gcc", :latest
 mod "puppetlabs/git", :latest
 mod "puppetlabs/haproxy", :latest
+mod "puppetlabs/hocon", :latest
+mod "puppetlabs/iis", :latest
 mod "puppetlabs/inifile", :latest
 mod "puppetlabs/image_build", :latest
 mod "puppetlabs/inventory", :latest
@@ -167,18 +203,20 @@ mod "puppetlabs/postgresql", # :latest
   :branch => 'master'
 mod "puppetlabs/powershell", :latest
 mod "puppetlabs/puppet_agent", :latest
+mod "puppetlabs/puppet_authorization", :latest
 mod "puppetlabs/puppetdb", :latest
 mod "puppetlabs/puppetserver_gem", :latest
 mod "puppetlabs/registry", :latest
-mod "puppetlabs/rabbitmq", :latest
 mod "puppetlabs/reboot", :latest
 mod "puppetlabs/rkt", :latest
 mod "puppetlabs/rsync", :latest
 mod "puppetlabs/ruby", :latest
 mod "puppetlabs/stdlib", :latest
 mod "puppetlabs/tagmail", :latest
-# Master branch accounts for systemd/upstart change in ubuntu
-mod "puppetlabs/tftp", # :latest
+# Switching from forge.puppet.com version 0.2.3 to Master branch which 
+# accounts for systemd/upstart change in ubuntu and fixes:
+# Error: /Stage[main]/Tftp/Service[tftpd-hpa]: Provider upstart is not functional on this host
+mod "puppetlabs/tftp",  #:latest
   :git    => 'https://github.com/puppetlabs/puppetlabs-tftp',
   :branch => 'master'
 mod "puppetlabs/tomcat", :latest
@@ -187,7 +225,11 @@ mod "puppetlabs/vcsrepo", :latest
 mod "puppetlabs/win_desktop_shortcut", :latest
 mod "puppetlabs/wsus_client", :latest
 mod "puppetlabs/xinetd", :latest
-mod "rtyler/jenkins", :latest
+# need to use master until 1.8.0 is release due to problem w/ jenkins/manifests/repo/debian.pp
+mod "rtyler/jenkins", # :latest
+  :git    => 'https://github.com/jenkinsci/puppet-jenkins',
+  :branch => 'master'
+
 mod "rcoleman/netatalk", :latest
 mod "saz/memcached", :latest
 mod "saz/rsyslog", :latest
@@ -200,41 +242,39 @@ mod "thias/libvirt", :latest
 mod "thias/quagga", :latest
 mod "thias/sysctl", :latest
 mod "vshn/gitlab", :latest
-mod "yo61/logrotate", :latest
-mod "zack/r10k", :latest
 
 # GitHub Only
 # Moving Quartermaster Module dnsmaq config to this add a template for proxydhcp to send upstream
 mod "lex/dnsmasq",
   :git    => 'https://github.com/ppouliot/puppet-dnsmasq',
   :branch => 'master'
-mod "puppet/puppetserver",
+mod "puppet/puppetserver", 
   :git    => 'https://github.com/voxpupuli/puppet-puppetserver',
   :branch => 'master'
 
 # PPouliot Modules not upstream
-mod "puppet/juju",
+mod "puppet/juju", 
   :git    => 'https://github.com/ppouliot/puppet-juju',
   :branch => 'master'
-mod "puppet/maas",
+mod "puppet/maas", 
   :git    => 'https://github.com/ppouliot/puppet-maas',
   :branch => 'master'
-mod "puppet/profiles",
+mod "puppet/profiles", 
   :git    => 'https://github.com/ppouliot/puppet-profiles',
   :branch => 'master'
-mod "puppet/quartermaster",
+mod "puppet/quartermaster", 
   :git    => 'https://github.com/ppouliot/puppet-quartermaster',
   :branch => 'master'
-mod "puppet/ipam",
+mod "puppet/ipam", 
   :git    => 'https://github.com/ppouliot/puppet-ipam',
   :branch => 'master'
-mod "puppet/hyper_v",
+mod "puppet/hyper_v", 
   :git    => 'https://github.com/ppouliot/puppet-hyper_v',
   :branch => 'master'
-mod "puppet/dell_openmanage",
+mod "puppet/dell_openmanage", 
   :git    => 'https://github.com/ppouliot/puppet-dell_openmanage',
   :branch => 'master'
-mod "puppet/petools",
+mod "puppet/petools", 
   :git    => 'https://github.com/ppouliot/puppet-petools',
   :branch => 'master'
 mod "puppet/windows_autologon",
